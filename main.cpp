@@ -5,5 +5,5 @@ int main(int argc, char *argv[]) // argc, argv - параметры команд
 {
     QCoreApplication a(argc, argv); // Создание терминала (окна), в котором будет все отображаться
     MyTcpServer myserv;
-    return a.exec(); // Запуск консольного приложения на исполнения
+    return a.exec(); // Запуск консольного приложения на исполнение
 }

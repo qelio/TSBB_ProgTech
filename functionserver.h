@@ -12,10 +12,10 @@ QByteArray authUser (QString login, QString password);
 QByteArray regUser (QString login, QString password, QString email);
 
 // Функция для вывода статистики по определенному пользователю (на данный момент заглушка)
-QByteArray getStat (QString login);
+QByteArray getMyStat (long sockId);
 
-// Функция для проверки правильности решения задачи (на данный момент заглушка)
-QByteArray checkNumber (QString task_number, QString variant, QString answer);
+// Функция для вывода статистики по всем пользователям (на данный момент заглушка)
+QByteArray getAllStat ();
 
 // Функция для парсинга получаемой строки
 QByteArray mainParser (QString request, long sockId);

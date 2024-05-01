@@ -1,7 +1,7 @@
 #include "functionserver.h"
 
 // Функция для авторизации пользователя (на данный момент заглушка)
-QByteArray authUser (QString login, QString password) {
+QByteArray authUser (QString login, QString password, long sockId) {
     if (login == "user" && password == "test") {
         return ("auth+&" + login + "\r\n").toUtf8();
     }
@@ -21,19 +21,15 @@ QByteArray regUser (QString login, QString password, QString email) {
 }
 
 // Функция для вывода статистики по определенному пользователю (на данный момент заглушка)
-QByteArray getStat (QString login) {
-    return "stat&3&6&21\r\n";
+QByteArray getMyStat (long sockId) {
+    return "stat\r\n";
 }
 
-// Функция для проверки правильности решения задачи (на данный момент заглушка)
-QByteArray checkNumber (QString task_number, QString variant, QString answer) {
-    if (task_number == "1" && variant == "2" && answer == "3") {
-        return "check+\r\n";
-    }
-    else {
-        return "check-\r\n";
-    }
+// Функция для вывода статистики по всем пользователям (на данный момент заглушка)
+QByteArray getAllStat () {
+    return "stat\r\n";
 }
+
 
 // Функция для парсинга получаемой строки
 QByteArray mainParser (QString request, long sockId) {
@@ -42,7 +38,7 @@ QByteArray mainParser (QString request, long sockId) {
     // Далее идет проверка команд, если команда не соответствует, то возвращаем "incrorrect"
     // Метод trimmed() необходим для исключения из строки такие символы, как \r, \n (whitespace characters)
     if (command[0] == "auth") {
-        return authUser(command[1], command[2].trimmed());
+        return authUser(command[1], command[2].trimmed(), sockId);
     }
     else if (command[0] == "reg") {
         return regUser(command[1], command[2], command[3].trimmed());
