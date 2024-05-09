@@ -15,7 +15,7 @@ database::database() {
 // Метод для создания таблицы в базе данных
 bool database::createTable() {
     QSqlQuery query(db);
-    return query.exec("CREATE TABLE users(id INTEGER PRIMARY KEY NOT NULL, login VARCHAR(20) NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(30) NOT NULL, stat INTEGER NOT NULL);");
+    return query.exec("CREATE TABLE users(id INTEGER PRIMARY KEY NOT NULL, login VARCHAR(20) NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(30) NOT NULL, stat INTEGER NOT NULL, sockid INTEGER NOT NULL);");
 }
 
 // Деструктор класса database
