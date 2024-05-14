@@ -2,12 +2,12 @@
 
 // Функция для авторизации пользователя (на данный момент заглушка)
 QByteArray authUser (QString login, QString password, long sockId) {
-    if (login == "user" && password == "test") {
-        return ("auth+&" + login + "\r\n").toUtf8();
+    QString password_sha = QString::fromStdString(sha512(password.toStdString()));
+    int user_id = database::getInstance().AuthUser(login, password_sha, sockId);
+    if (user_id != 0) {
+        return "auth+\r\n";
     }
-    else {
-        return "auth-\r\n";
-    }
+    return "auth-\r\n";
 }
 
 // Функция для регистрации пользователя (на данный момент заглушка)

@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QStringList>
+#include "sha512.h"
+#include "database.h"
 
 // Функция для авторизации пользователя (на данный момент заглушка)
 QByteArray authUser (QString login, QString password);

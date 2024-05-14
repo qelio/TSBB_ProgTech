@@ -35,8 +35,9 @@ private:
 
 public:
     bool createTable();
+    int AuthUser(QString login, QString password, long sockId);
     static database& getInstance();
-    QStringList queryToDatabase(QStringList str);
+    QStringList queryToDatabase(QString str, int count_columns, bool select_query);
 };
 
 #endif // DATABASE_H
