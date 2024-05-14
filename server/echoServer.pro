@@ -25,7 +25,8 @@ SOURCES += \
     database.cpp \
     functionserver.cpp \
     main.cpp \
-    mytcpserver.cpp
+    mytcpserver.cpp \
+    sha512.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -36,4 +37,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     database.h \
     functionserver.h \
-    mytcpserver.h
+    mytcpserver.h \
+    sha512.h
