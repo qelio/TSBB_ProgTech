@@ -39,3 +39,5 @@ HEADERS += \
     functionserver.h \
     mytcpserver.h \
     sha512.h
+
+FORMS +=
