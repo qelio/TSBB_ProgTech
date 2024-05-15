@@ -58,7 +58,19 @@ int database::AuthUser(QString login, QString password, long sockId) {
     return 0;
 }
 
-
+bool database::RegUser(QString login, QString password, QString email, long sockId) {
+    QString query = "SELECT COUNT(*) AS users_count FROM users WHERE email = '%1' OR login = '%2'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(email).arg(login), 1, true);
+    if (answer[0].toInt() == 0) {
+        query = "INSERT INTO users (login, password, email, stat, sockid) VALUES ('%1', '%2', '%3', '%4', '%5')";
+        QStringList insert_user = p_instance->queryToDatabase(query.arg(login).arg(password).arg(email).arg(0).arg(sockId), 0, false);
+        if (insert_user[0] != "error_sql") {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
 
 QStringList database::queryToDatabase(QString str, int count_columns, bool select_query) {
     // Здесь будет реализована обработка запросов к базе данных

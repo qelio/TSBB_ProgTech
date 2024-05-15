@@ -1,6 +1,12 @@
 #include "functionserver.h"
 
-// Функция для авторизации пользователя (на данный момент заглушка)
+// Функция для проверки корретности email
+bool isValidEmail(QString email) {
+    QRegularExpression regex(R"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})");
+    return regex.match(email).hasMatch();
+}
+
+// Функция для авторизации пользователя
 QByteArray authUser (QString login, QString password, long sockId) {
     QString password_sha = QString::fromStdString(sha512(password.toStdString()));
     int user_id = database::getInstance().AuthUser(login, password_sha, sockId);
@@ -10,14 +16,17 @@ QByteArray authUser (QString login, QString password, long sockId) {
     return "auth-\r\n";
 }
 
-// Функция для регистрации пользователя (на данный момент заглушка)
-QByteArray regUser (QString login, QString password, QString email) {
-    if (login == "user" && password == "test" && email == "test@mail.ru") {
-        return ("reg+&" + login + "\r\n").toUtf8();
-    }
-    else {
+// Функция для регистрации пользователя
+QByteArray regUser (QString login, QString password, QString email, long sockId) {
+    if (isValidEmail(email)) {
+        QString password_sha = QString::fromStdString(sha512(password.toStdString()));
+        bool success_reg = database::getInstance().RegUser(login, password_sha, email, sockId);
+        if (success_reg) {
+            return "reg+\r\n";
+        }
         return "reg-\r\n";
     }
+    return "reg-\r\n";
 }
 
 // Функция для вывода статистики по определенному пользователю (на данный момент заглушка)
@@ -41,7 +50,7 @@ QByteArray mainParser (QString request, long sockId) {
         return authUser(command[1], command[2].trimmed(), sockId);
     }
     else if (command[0] == "reg") {
-        return regUser(command[1], command[2], command[3].trimmed());
+        return regUser(command[1], command[2], command[3].trimmed(), sockId);
     }
     else if (command[0] == "stat") {
         return getMyStat(sockId);

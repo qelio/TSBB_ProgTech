@@ -4,8 +4,12 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QStringList>
+#include <QRegularExpression>>
 #include "sha512.h"
 #include "database.h"
+
+// Функция для проверки корретности email
+bool isValidEmail(QString email);
 
 // Функция для авторизации пользователя (на данный момент заглушка)
 QByteArray authUser (QString login, QString password);
