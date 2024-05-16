@@ -8,7 +8,7 @@ databaseDestroyer database::destroyer;
 // Метод добавления (открытия) базы данных
 database::database() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("C:\\Users\\slava\\Downloads\\ProektTP-master\\server\\base.db");
+    db.setDatabaseName("base.db");
     if (!db.open()) {
         qDebug() << "Error: database opening error";
     }
