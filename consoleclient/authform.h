@@ -11,7 +11,6 @@ class AuthForm;
 class AuthForm : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit AuthForm(QWidget *parent = nullptr);
     ~AuthForm();
