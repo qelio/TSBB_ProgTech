@@ -25,6 +25,7 @@ private slots:
     void on_aes_return_clicked();
     void on_dichotomy_return_clicked();
     void on_shortest_distance_return_clicked();
+    void slot_on_auth(QString log);
 
 private:
     Ui::MainWindow *ui;

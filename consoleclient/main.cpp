@@ -12,6 +12,6 @@ int main(int argc, char *argv[])
     std::cin >> msg;
     SingletonClient::getInstance()->send_msg_to_server(QString::fromStdString(msg));
     MainWindow w;
-    w.show();
+    //w.show();
     return a.exec();
 }

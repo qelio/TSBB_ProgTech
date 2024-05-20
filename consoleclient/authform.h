@@ -2,6 +2,7 @@
 #define AUTHFORM_H
 
 #include <QWidget>
+#include "functionclient.h"
 
 namespace Ui {
 class AuthForm;
@@ -21,6 +22,8 @@ private slots:
 
 private:
     Ui::AuthForm *ui;
+signals:
+    void auth_ok(QString);
 };
 
 #endif // AUTHFORM_H

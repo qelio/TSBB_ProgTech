@@ -16,9 +16,17 @@ AuthForm::~AuthForm()
 }
 
 void AuthForm::on_sign_up_clicked() {
-    ui->email->setVisible(true);
-    ui->email_label->setVisible(true);
-    ui->sign_in->setText("Вернуться ко входу");
+    if (!ui->email->isVisible()) {
+        ui->email->setVisible(true);
+        ui->email_label->setVisible(true);
+        ui->sign_in->setText("Вернуться ко входу");
+    }
+    else {
+        if (reg(ui->login_label->text(), ui->password_label->text(), ui->email_label->text())) {
+            this->hide();
+            emit auth_ok(ui->login_label->text());
+        }
+    }
 }
 
 void AuthForm::on_sign_in_clicked() {
@@ -28,6 +36,12 @@ void AuthForm::on_sign_in_clicked() {
         ui->sign_in->setText("Войти");
     }
     else {
-        // Реализация алгоритма входа в аккаунт
+        if (auth(ui->login_label->text(), ui->password_label->text())) {
+            this->hide();
+            emit auth_ok(ui->login_label->text());
+        }
+        else {
+            // Выводим ошибку авторизации
+        }
     }
 }

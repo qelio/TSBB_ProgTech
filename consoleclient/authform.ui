@@ -77,6 +77,9 @@
     <item>
      <widget class="QLineEdit" name="email_label">
       <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
        <string>Введите e-mail...</string>
       </property>
      </widget>

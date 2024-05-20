@@ -8,7 +8,8 @@ SingletonClient::SingletonClient(QObject* parent) : QObject(parent)
     mTcpSocket = new QTcpSocket(this);
     mTcpSocket->connectToHost("127.0.0.1", 33333);
 
-    connect(mTcpSocket, &QTcpSocket::readyRead, this, &SingletonClient::slotServerRead);
+    connect(mTcpSocket, SIGNAL(readyRead()),
+            this, SLOT(slotServerRead()));
 }
 
 
@@ -22,19 +23,15 @@ SingletonClient* SingletonClient::getInstance()
     return p_instance;
 }
 
-void SingletonClient::send_msg_to_server(QString query)
+QString SingletonClient::send_msg_to_server(QString query)
 {
     mTcpSocket->write(query.toUtf8());
-}
-
-void SingletonClient::slotServerRead()
-{
+    mTcpSocket->waitForReadyRead();
     QString msg = "";
-    while (mTcpSocket->bytesAvailable() > 0)
-    {
+    while (mTcpSocket->bytesAvailable() > 0) {
         QByteArray array = mTcpSocket->readAll();
         msg.append(array);
     }
-    qDebug() << msg;
-    emit message_from_server(msg);
+    return msg;
 }
+

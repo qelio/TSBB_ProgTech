@@ -8,6 +8,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     auth_ui = new AuthForm;
     auth_ui->show();
+    connect(auth_ui,&AuthForm::auth_ok,this, &MainWindow::slot_on_auth);
+}
+
+void MainWindow::slot_on_auth(QString log)
+{
+    this->show();
 }
 
 MainWindow::~MainWindow()

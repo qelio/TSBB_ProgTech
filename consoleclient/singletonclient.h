@@ -37,13 +37,9 @@ protected:
 
 public:
     static SingletonClient* getInstance();
-    void slotServerRead();
+    QString send_msg_to_server(QString query);
 
-public slots:
-    void send_msg_to_server(QString query);
 
-signals:
-    void message_from_server(QString msg);
 };
 
 #endif // SINGLETONCLIENT_H

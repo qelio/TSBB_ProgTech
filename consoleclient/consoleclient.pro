@@ -10,12 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     authform.cpp \
+    functionclient.cpp \
     main.cpp \
     mainwindow.cpp \
     singletonclient.cpp
 
 HEADERS += \
     authform.h \
+    functionclient.h \
     mainwindow.h \
     singletonclient.h
 
