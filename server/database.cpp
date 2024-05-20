@@ -8,7 +8,7 @@ databaseDestroyer database::destroyer;
 // Метод добавления (открытия) базы данных
 database::database() {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("base.db");
+    db.setDatabaseName("C:\\Users\\slava\\Downloads\\ProektTP-master\\server\\base.db");
     if (!db.open()) {
         qDebug() << "Error: database opening error";
     }
@@ -17,7 +17,7 @@ database::database() {
 // Метод для создания таблицы в базе данных
 bool database::createTable() {
     QSqlQuery query(db);
-    return query.exec("CREATE TABLE users(id INTEGER PRIMARY KEY NOT NULL, login VARCHAR(20) NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(30) NOT NULL, stat INTEGER NOT NULL, sockid INTEGER NOT NULL);");
+    return query.exec("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, login VARCHAR(20) NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(30) NOT NULL, stat1 INTEGER NOT NULL, stat2 INTEGER NOT NULL, sockid INTEGER NOT NULL);");
 }
 
 // Деструктор класса database
@@ -62,14 +62,38 @@ bool database::RegUser(QString login, QString password, QString email, long sock
     QString query = "SELECT COUNT(*) AS users_count FROM users WHERE email = '%1' OR login = '%2'";
     QStringList answer = p_instance->queryToDatabase(query.arg(email).arg(login), 1, true);
     if (answer[0].toInt() == 0) {
-        query = "INSERT INTO users (login, password, email, stat, sockid) VALUES ('%1', '%2', '%3', '%4', '%5')";
-        QStringList insert_user = p_instance->queryToDatabase(query.arg(login).arg(password).arg(email).arg(0).arg(sockId), 0, false);
+        query = "INSERT INTO users (login, password, email, stat1, stat2, sockid) VALUES ('%1', '%2', '%3', '%4', '%5', '%6')";
+        QStringList insert_user = p_instance->queryToDatabase(query.arg(login).arg(password).arg(email).arg(0).arg(0).arg(sockId), 0, false);
         if (insert_user[0] != "error_sql") {
             return true;
         }
         return false;
     }
     return false;
+}
+
+bool database::LogOutUser(long sockId) {
+    QString query = "UPDATE users SET sockid = '0' WHERE sockid = '%1'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(sockId), 0, false);
+    if (answer[0] != "error_sql") {
+        return true;
+    }
+    return false;
+}
+
+bool database::ActiveSessionUser (QString login, long sockId) {
+    QString query = "SELECT COUNT(*) AS users_count FROM users WHERE login = '%1' AND sockid = '%2'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(login).arg(sockId), 1, true);
+    if (answer[0].toInt() > 0) {
+        return true;
+    }
+    return false;
+}
+
+QStringList database::StatUser (QString login, long sockId) {
+    QString query = "SELECT stat1, stat2 FROM users WHERE login = '%1' AND sockid = '%2'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(login).arg(sockId), 2, true);
+    return answer;
 }
 
 QStringList database::queryToDatabase(QString str, int count_columns, bool select_query) {

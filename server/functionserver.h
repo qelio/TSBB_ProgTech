@@ -12,16 +12,16 @@
 bool isValidEmail(QString email);
 
 // Функция для авторизации пользователя (на данный момент заглушка)
-QByteArray authUser (QString login, QString password);
+QByteArray authUser (QString login, QString password, long sockId);
 
 // Функция для регистрации пользователя (на данный момент заглушка)
-QByteArray regUser (QString login, QString password, QString email);
+QByteArray regUser (QString login, QString password, QString email, long sockId);
+
+// Функция для выхода из аккаунта
+bool logOutUser (long sockId);
 
 // Функция для вывода статистики по определенному пользователю (на данный момент заглушка)
 QByteArray getMyStat (long sockId);
-
-// Функция для вывода статистики по всем пользователям (на данный момент заглушка)
-QByteArray getAllStat ();
 
 // Функция для парсинга получаемой строки
 QByteArray mainParser (QString request, long sockId);

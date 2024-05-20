@@ -8,6 +8,7 @@ bool isValidEmail(QString email) {
 
 // Функция для авторизации пользователя
 QByteArray authUser (QString login, QString password, long sockId) {
+    qDebug() << sockId;
     QString password_sha = QString::fromStdString(sha512(password.toStdString()));
     int user_id = database::getInstance().AuthUser(login, password_sha, sockId);
     if (user_id != 0) {
@@ -30,15 +31,21 @@ QByteArray regUser (QString login, QString password, QString email, long sockId)
 }
 
 // Функция для вывода статистики по определенному пользователю (на данный момент заглушка)
-QByteArray getMyStat (long sockId) {
-    return "stat\r\n";
+QByteArray getMyStat (QString login, long sockId) {
+    if (database::getInstance().ActiveSessionUser(login, sockId)) {
+        QStringList stat = database::getInstance().StatUser(login, sockId);
+        return "stat&" + stat[0].toUtf8() + "&" + stat[1].toUtf8() + "\r\n";
+    }
+    return "stat-\r\n";
 }
 
-// Функция для вывода статистики по всем пользователям (на данный момент заглушка)
-QByteArray getAllStat () {
-    return "stat\r\n";
+bool logOutUser (long sockId) {
+    qDebug() << sockId;
+    if (database::getInstance().LogOutUser(sockId)) {
+        return true;
+    }
+    return false;
 }
-
 
 // Функция для парсинга получаемой строки
 QByteArray mainParser (QString request, long sockId) {
@@ -53,7 +60,7 @@ QByteArray mainParser (QString request, long sockId) {
         return regUser(command[1], command[2], command[3].trimmed(), sockId);
     }
     else if (command[0] == "stat") {
-        return getMyStat(sockId);
+        return getMyStat(command[1].trimmed(), sockId);
     }
     else {
         return "incorrent\r\n";

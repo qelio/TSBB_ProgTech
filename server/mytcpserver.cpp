@@ -30,6 +30,8 @@ MyTcpServer::MyTcpServer(QObject *parent) : QObject(parent){
 void MyTcpServer::slotNewConnection(){
     // Инициализация указателя mTcpSocket, то есть указание места в памяти, где расположен идентифкатор соединения
     mTcpSocket = mTcpServer->nextPendingConnection();
+    int socketDescriptor = mTcpSocket->socketDescriptor();
+    mSocketDescriptors[socketDescriptor] = mTcpSocket;
     // Если соединение готово к чтению сообщений (readyRead), то запускаем slotServerRead
     connect(mTcpSocket, &QTcpSocket::readyRead,this,&MyTcpServer::slotServerRead);
     // Если соединение получило сигнал о том, что клиент отключился, то запускаем slotClientDisconnected
@@ -38,22 +40,28 @@ void MyTcpServer::slotNewConnection(){
 
 // Метод для чтения слота
 void MyTcpServer::slotServerRead(){
+    QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     // Пока сокет может считать байты, выполняем следующие действия
-    while(mTcpSocket->bytesAvailable()>0)
+    while(socket->bytesAvailable()>0)
     {
         QString string = "";
         // Создаем массив, куда записываем всё, что было считано
-        QByteArray array = mTcpSocket->readAll();
+        QByteArray array = socket->readAll();
         // Добавление массива в QString
         string.append(array);
         // Вывод полученной строки в консоль
         qDebug() << string.toUtf8();
         // Вывод результата парсинга (результат зависит от типа вызываемой функции)
-        mTcpSocket->write(mainParser(string, mTcpSocket->socketDescriptor()));
+        socket->write(mainParser(string, socket->socketDescriptor()));
     }
 }
 
 // Метод для закрытия сокета
 void MyTcpServer::slotClientDisconnected(){
-    mTcpSocket->close();
+    QTcpSocket* socket = qobject_cast<QTcpSocket*>(sender());
+    int socketDescriptor = mSocketDescriptors.key(socket);
+    logOutUser(socketDescriptor);
+
+    mSocketDescriptors.remove(socketDescriptor);
+    socket->close();
 }

@@ -32,13 +32,18 @@ private:
     database(const database&) = delete;
     void operator= (const database&) = delete;
     friend class databaseDestroyer;
+    bool createTable();
+    QStringList queryToDatabase(QString str, int count_columns, bool select_query);
 
 public:
-    bool createTable();
+
     int AuthUser(QString login, QString password, long sockId);
     bool RegUser(QString login, QString password, QString email, long sockId);
+    bool LogOutUser(long sockId);
+    bool ActiveSessionUser (QString login, long sockId);
+    QStringList StatUser (QString login, long sockId);
     static database& getInstance();
-    QStringList queryToDatabase(QString str, int count_columns, bool select_query);
+
 };
 
 #endif // DATABASE_H

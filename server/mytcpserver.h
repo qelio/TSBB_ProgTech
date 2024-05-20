@@ -10,6 +10,7 @@
 #include <QtNetwork> // Необходима для сетевого взаимодействи
 #include <QByteArray> // Для побайтовой передачи данных (массив байтов)
 #include <QDebug> // Необходима для вывода в консоль каких-либо сообщений
+#include <QMap>
 
 class MyTcpServer : public QObject // Является наследником QObject, чтобы работал механизм сигналов и слотов
 {
@@ -26,6 +27,7 @@ private:
     QTcpServer * mTcpServer; // Создание сервера
     QTcpSocket * mTcpSocket; // Создание сокета (для однопользовательского сервера), задание соединения с сервером
     //int server_status;
+    QMap<int, QTcpSocket*> mSocketDescriptors;
 };
 #endif // MYTCPSERVER_H
 
