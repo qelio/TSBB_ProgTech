@@ -9,6 +9,6 @@ bool auth(QString login, QString password);
 
 bool reg(QString login, QString password, QString email);
 
-QStringList get_stat();
+QStringList get_stat_login(QString login);
 
 #endif // FUNCTIONSFORCLIENT_H

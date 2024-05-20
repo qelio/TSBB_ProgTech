@@ -114,9 +114,11 @@ public:
         AuthForm->setWindowTitle(QCoreApplication::translate("AuthForm", "Form", nullptr));
         hello_text->setText(QCoreApplication::translate("AuthForm", "\320\224\320\276\320\261\321\200\320\276 \320\277\320\276\320\266\320\260\320\273\320\276\320\262\320\260\321\202\321\214!", nullptr));
         login->setText(QCoreApplication::translate("AuthForm", "\320\233\320\276\320\263\320\270\320\275:", nullptr));
-        login_label->setText(QCoreApplication::translate("AuthForm", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\273\320\276\320\263\320\270\320\275...", nullptr));
+        login_label->setText(QString());
+        login_label->setPlaceholderText(QCoreApplication::translate("AuthForm", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\273\320\276\320\263\320\270\320\275...", nullptr));
         password->setText(QCoreApplication::translate("AuthForm", "\320\237\320\260\321\200\320\276\320\273\321\214:", nullptr));
-        password_label->setText(QCoreApplication::translate("AuthForm", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\277\320\260\321\200\320\276\320\273\321\214...", nullptr));
+        password_label->setText(QString());
+        password_label->setPlaceholderText(QCoreApplication::translate("AuthForm", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\277\320\260\321\200\320\276\320\273\321\214...", nullptr));
         email->setText(QCoreApplication::translate("AuthForm", "\320\220\320\264\321\200\320\265\321\201 \321\215\320\273\320\265\320\272\321\202\321\200\320\276\320\275\320\275\320\276\320\271 \320\277\320\276\321\207\321\202\321\213:", nullptr));
         email_label->setText(QString());
         email_label->setPlaceholderText(QCoreApplication::translate("AuthForm", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 e-mail...", nullptr));

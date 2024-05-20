@@ -34,10 +34,10 @@ public:
     QVBoxLayout *verticalLayout;
     QPushButton *shortest_distance_button;
     QPushButton *dichotomy_method_button;
-    QPushButton *aes_button;
     QHBoxLayout *horizontalLayout;
     QPushButton *stat_button;
     QPushButton *exit_button;
+    QLabel *stat1;
     QWidget *page_shortest_distance;
     QWidget *verticalLayoutWidget_3;
     QVBoxLayout *verticalLayout_3;
@@ -49,15 +49,6 @@ public:
     QPushButton *shortest_distance_next;
     QPushButton *shortest_distance_return;
     QWidget *page_aes;
-    QWidget *verticalLayoutWidget_5;
-    QVBoxLayout *verticalLayout_5;
-    QLabel *aes_text;
-    QLabel *aes_condition;
-    QLineEdit *aes_label;
-    QHBoxLayout *horizontalLayout_4;
-    QPushButton *aes_check;
-    QPushButton *aes_next;
-    QPushButton *aes_return;
     QWidget *page_dichotomy;
     QWidget *verticalLayoutWidget_4;
     QVBoxLayout *verticalLayout_4;
@@ -115,13 +106,6 @@ public:
 
         verticalLayout->addWidget(dichotomy_method_button);
 
-        aes_button = new QPushButton(verticalLayoutWidget_2);
-        aes_button->setObjectName("aes_button");
-        sizePolicy.setHeightForWidth(aes_button->sizePolicy().hasHeightForWidth());
-        aes_button->setSizePolicy(sizePolicy);
-
-        verticalLayout->addWidget(aes_button);
-
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(-1, 50, -1, -1);
@@ -144,6 +128,11 @@ public:
 
 
         verticalLayout_2->addLayout(verticalLayout);
+
+        stat1 = new QLabel(verticalLayoutWidget_2);
+        stat1->setObjectName("stat1");
+
+        verticalLayout_2->addWidget(stat1);
 
         main_pages->addWidget(central_page);
         page_shortest_distance = new QWidget();
@@ -194,49 +183,6 @@ public:
         main_pages->addWidget(page_shortest_distance);
         page_aes = new QWidget();
         page_aes->setObjectName("page_aes");
-        verticalLayoutWidget_5 = new QWidget(page_aes);
-        verticalLayoutWidget_5->setObjectName("verticalLayoutWidget_5");
-        verticalLayoutWidget_5->setGeometry(QRect(30, 30, 721, 451));
-        verticalLayout_5 = new QVBoxLayout(verticalLayoutWidget_5);
-        verticalLayout_5->setObjectName("verticalLayout_5");
-        verticalLayout_5->setContentsMargins(0, 0, 0, 0);
-        aes_text = new QLabel(verticalLayoutWidget_5);
-        aes_text->setObjectName("aes_text");
-        aes_text->setFont(font);
-        aes_text->setAlignment(Qt::AlignCenter);
-
-        verticalLayout_5->addWidget(aes_text);
-
-        aes_condition = new QLabel(verticalLayoutWidget_5);
-        aes_condition->setObjectName("aes_condition");
-
-        verticalLayout_5->addWidget(aes_condition);
-
-        aes_label = new QLineEdit(verticalLayoutWidget_5);
-        aes_label->setObjectName("aes_label");
-
-        verticalLayout_5->addWidget(aes_label);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
-        aes_check = new QPushButton(verticalLayoutWidget_5);
-        aes_check->setObjectName("aes_check");
-
-        horizontalLayout_4->addWidget(aes_check);
-
-        aes_next = new QPushButton(verticalLayoutWidget_5);
-        aes_next->setObjectName("aes_next");
-
-        horizontalLayout_4->addWidget(aes_next);
-
-
-        verticalLayout_5->addLayout(horizontalLayout_4);
-
-        aes_return = new QPushButton(verticalLayoutWidget_5);
-        aes_return->setObjectName("aes_return");
-
-        verticalLayout_5->addWidget(aes_return);
-
         main_pages->addWidget(page_aes);
         page_dichotomy = new QWidget();
         page_dichotomy->setObjectName("page_dichotomy");
@@ -297,24 +243,20 @@ public:
         desired_action->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\261\320\265\321\200\320\270\321\202\320\265 \320\266\320\265\320\273\320\260\320\265\320\274\320\276\320\265 \320\264\320\265\320\271\321\201\321\202\320\262\320\270\320\265:", nullptr));
         shortest_distance_button->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272 \320\272\321\200\320\260\321\202\321\207\320\260\320\271\321\210\320\265\320\263\320\276 \321\200\320\260\321\201\321\201\321\202\320\276\321\217\320\275\320\270\321\217 \320\274\320\265\320\266\320\264\321\203 \320\262\320\265\321\200\321\210\320\270\320\275\320\260\320\274\320\270 \320\263\321\200\320\260\321\204\320\260", nullptr));
         dichotomy_method_button->setText(QCoreApplication::translate("MainWindow", "\320\234\320\265\321\202\320\276\320\264 \320\264\320\265\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\277\320\276\320\273\320\260\320\274 (\320\274\320\265\321\202\320\276\320\264 \320\264\320\270\321\205\320\276\321\202\320\276\320\274\320\270\320\270)", nullptr));
-        aes_button->setText(QCoreApplication::translate("MainWindow", "\320\250\320\270\321\204\321\200\320\276\320\262\320\260\320\275\320\270\320\265 AES", nullptr));
-        stat_button->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\273\321\203\321\207\320\270\321\202\321\214 \321\201\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\321\203", nullptr));
+        stat_button->setText(QCoreApplication::translate("MainWindow", "\320\236\320\261\320\275\320\276\320\262\320\270\321\202\321\214 \321\201\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\321\203", nullptr));
         exit_button->setText(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\271\321\202\320\270 \320\270\320\267 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\320\274\321\213", nullptr));
+        stat1->setText(QCoreApplication::translate("MainWindow", "\320\241\321\202\320\260\321\202\320\270\321\201\321\202\320\270\320\272\320\260 \320\277\320\276 \320\267\320\260\320\264\320\260\321\207\320\265 \342\204\2261: 0", nullptr));
         shortest_distance_text->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272 \320\272\321\200\320\260\321\202\321\207\320\260\320\271\321\210\320\265\320\263\320\276 \321\200\320\260\321\201\321\201\321\202\320\276\321\217\320\275\320\270\321\217 \320\274\320\265\320\266\320\264\321\203 \320\262\320\265\321\200\321\210\320\270\320\275\320\260\320\274\320\270 \320\263\321\200\320\260\321\204\320\260", nullptr));
         shortest_distance_condition->setText(QCoreApplication::translate("MainWindow", "\320\227\320\264\320\265\321\201\321\214 \320\264\320\276\320\273\320\266\320\265\320\275 \320\261\321\213\321\202\321\214 \321\202\320\265\320\272\321\201\321\202 \320\267\320\260\320\264\320\260\321\207\320\270 (\320\267\320\260\320\264\320\260\320\275\320\270\321\217)...", nullptr));
-        shortest_distance_label->setText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\276\321\202\320\262\320\265\321\202...", nullptr));
+        shortest_distance_label->setText(QString());
+        shortest_distance_label->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\276\321\202\320\262\320\265\321\202...", nullptr));
         shortest_distance_check->setText(QCoreApplication::translate("MainWindow", "\320\237\321\200\320\276\320\262\320\265\321\200\320\270\321\202\321\214 \320\276\321\202\320\262\320\265\321\202", nullptr));
         shortest_distance_next->setText(QCoreApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\272 \320\275\320\276\320\262\320\276\320\271 \320\267\320\260\320\264\320\260\321\207\320\265", nullptr));
         shortest_distance_return->setText(QCoreApplication::translate("MainWindow", "\320\222\320\265\321\200\320\275\321\203\321\202\321\214\321\201\321\217 \320\272 \320\262\321\213\320\261\320\276\321\200\321\203 \320\267\320\260\320\264\320\260\320\275\320\270\321\217", nullptr));
-        aes_text->setText(QCoreApplication::translate("MainWindow", "\320\250\320\270\321\204\321\200\320\276\320\262\320\260\320\275\320\270\320\265 AES", nullptr));
-        aes_condition->setText(QCoreApplication::translate("MainWindow", "\320\227\320\264\320\265\321\201\321\214 \320\264\320\276\320\273\320\266\320\265\320\275 \320\261\321\213\321\202\321\214 \321\202\320\265\320\272\321\201\321\202 \320\267\320\260\320\264\320\260\321\207\320\270 (\320\267\320\260\320\264\320\260\320\275\320\270\321\217)...", nullptr));
-        aes_label->setText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\276\321\202\320\262\320\265\321\202...", nullptr));
-        aes_check->setText(QCoreApplication::translate("MainWindow", "\320\237\321\200\320\276\320\262\320\265\321\200\320\270\321\202\321\214 \320\276\321\202\320\262\320\265\321\202", nullptr));
-        aes_next->setText(QCoreApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\272 \320\275\320\276\320\262\320\276\320\271 \320\267\320\260\320\264\320\260\321\207\320\265", nullptr));
-        aes_return->setText(QCoreApplication::translate("MainWindow", "\320\222\320\265\321\200\320\275\321\203\321\202\321\214\321\201\321\217 \320\272 \320\262\321\213\320\261\320\276\321\200\321\203 \320\267\320\260\320\264\320\260\320\275\320\270\321\217", nullptr));
         dichotomy_text->setText(QCoreApplication::translate("MainWindow", "\320\234\320\265\321\202\320\276\320\264 \320\264\320\265\320\273\320\265\320\275\320\270\321\217 \320\277\320\276\320\277\320\276\320\273\320\260\320\274 (\320\274\320\265\321\202\320\276\320\264 \320\264\320\270\321\205\320\276\321\202\320\276\320\274\320\270\320\270)", nullptr));
         dichotomy_condition->setText(QCoreApplication::translate("MainWindow", "\320\227\320\264\320\265\321\201\321\214 \320\264\320\276\320\273\320\266\320\265\320\275 \320\261\321\213\321\202\321\214 \321\202\320\265\320\272\321\201\321\202 \320\267\320\260\320\264\320\260\321\207\320\270 (\320\267\320\260\320\264\320\260\320\275\320\270\321\217)...", nullptr));
-        dichotomy_label->setText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\276\321\202\320\262\320\265\321\202...", nullptr));
+        dichotomy_label->setText(QString());
+        dichotomy_label->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\222\320\262\320\265\320\264\320\270\321\202\320\265 \320\276\321\202\320\262\320\265\321\202...", nullptr));
         dichotomy_check->setText(QCoreApplication::translate("MainWindow", "\320\237\321\200\320\276\320\262\320\265\321\200\320\270\321\202\321\214 \320\276\321\202\320\262\320\265\321\202", nullptr));
         dichotomy_next->setText(QCoreApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\271\321\202\320\270 \320\272 \320\275\320\276\320\262\320\276\320\271 \320\267\320\260\320\264\320\260\321\207\320\265", nullptr));
         dichotomy_return->setText(QCoreApplication::translate("MainWindow", "\320\222\320\265\321\200\320\275\321\203\321\202\321\214\321\201\321\217 \320\272 \320\262\321\213\320\261\320\276\321\200\321\203 \320\267\320\260\320\264\320\260\320\275\320\270\321\217", nullptr));

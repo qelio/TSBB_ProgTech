@@ -20,6 +20,8 @@ bool reg(QString login, QString password, QString email) {
     }
 }
 
-QStringList get_stat() {
-
+QStringList get_stat_login(QString login) {
+    QString res = SingletonClient::getInstance()->send_msg_to_server("stat&" + login);
+    QStringList stats = res.split("&");
+    return stats;
 }

@@ -13,12 +13,14 @@ SOURCES += \
     functionclient.cpp \
     main.cpp \
     mainwindow.cpp \
+    managementwindow.cpp \
     singletonclient.cpp
 
 HEADERS += \
     authform.h \
     functionclient.h \
     mainwindow.h \
+    managementwindow.h \
     singletonclient.h
 
 FORMS += \

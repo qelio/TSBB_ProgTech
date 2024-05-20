@@ -1,0 +1,10 @@
+release/authform.o
+release/functionclient.o
+release/main.o
+release/mainwindow.o
+release/managementwindow.o
+release/singletonclient.o
+release/moc_authform.o
+release/moc_mainwindow.o
+release/moc_managementwindow.o
+release/moc_singletonclient.o

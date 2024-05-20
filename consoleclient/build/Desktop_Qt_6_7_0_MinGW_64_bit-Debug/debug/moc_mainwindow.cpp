@@ -38,15 +38,14 @@ namespace {
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
     "MainWindow",
-    "on_dichotomy_method_button_clicked",
+    "close_window",
     "",
-    "on_aes_button_clicked",
+    "on_dichotomy_method_button_clicked",
     "on_shortest_distance_button_clicked",
-    "on_aes_return_clicked",
     "on_dichotomy_return_clicked",
     "on_shortest_distance_return_clicked",
-    "slot_on_auth",
-    "log"
+    "on_exit_button_clicked",
+    "on_stat_button_clicked"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -64,16 +63,21 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags, initial metatype offsets
+       1,    0,   56,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x08,    1 /* Private */,
        3,    0,   57,    2, 0x08,    2 /* Private */,
        4,    0,   58,    2, 0x08,    3 /* Private */,
        5,    0,   59,    2, 0x08,    4 /* Private */,
        6,    0,   60,    2, 0x08,    5 /* Private */,
        7,    0,   61,    2, 0x08,    6 /* Private */,
-       8,    1,   62,    2, 0x08,    7 /* Private */,
+       8,    0,   62,    2, 0x08,    7 /* Private */,
+
+ // signals: parameters
+    QMetaType::Void,
 
  // slots: parameters
     QMetaType::Void,
@@ -82,7 +86,6 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    9,
 
        0        // eod
 };
@@ -96,21 +99,20 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
+        // method 'close_window'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_dichotomy_method_button_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_aes_button_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_shortest_distance_button_clicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'on_aes_return_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_dichotomy_return_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_shortest_distance_return_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'slot_on_auth'
+        // method 'on_exit_button_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString, std::false_type>
+        // method 'on_stat_button_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -121,16 +123,26 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->on_dichotomy_method_button_clicked(); break;
-        case 1: _t->on_aes_button_clicked(); break;
+        case 0: _t->close_window(); break;
+        case 1: _t->on_dichotomy_method_button_clicked(); break;
         case 2: _t->on_shortest_distance_button_clicked(); break;
-        case 3: _t->on_aes_return_clicked(); break;
-        case 4: _t->on_dichotomy_return_clicked(); break;
-        case 5: _t->on_shortest_distance_return_clicked(); break;
-        case 6: _t->slot_on_auth((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 3: _t->on_dichotomy_return_clicked(); break;
+        case 4: _t->on_shortest_distance_return_clicked(); break;
+        case 5: _t->on_exit_button_clicked(); break;
+        case 6: _t->on_stat_button_clicked(); break;
         default: ;
         }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        {
+            using _t = void (MainWindow::*)();
+            if (_t _q_method = &MainWindow::close_window; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 0;
+                return;
+            }
+        }
     }
+    (void)_a;
 }
 
 const QMetaObject *MainWindow::metaObject() const
@@ -161,5 +173,11 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 7;
     }
     return _id;
+}
+
+// SIGNAL 0
+void MainWindow::close_window()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

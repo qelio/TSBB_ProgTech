@@ -49,6 +49,9 @@
     <item>
      <widget class="QLineEdit" name="login_label">
       <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
        <string>Введите логин...</string>
       </property>
      </widget>
@@ -63,6 +66,9 @@
     <item>
      <widget class="QLineEdit" name="password_label">
       <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
        <string>Введите пароль...</string>
       </property>
      </widget>

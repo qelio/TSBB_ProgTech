@@ -1,0 +1,10 @@
+debug/authform.o
+debug/functionclient.o
+debug/main.o
+debug/mainwindow.o
+debug/managementwindow.o
+debug/singletonclient.o
+debug/moc_authform.o
+debug/moc_mainwindow.o
+debug/moc_managementwindow.o
+debug/moc_singletonclient.o

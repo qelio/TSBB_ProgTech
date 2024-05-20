@@ -23,8 +23,10 @@ void AuthForm::on_sign_up_clicked() {
     }
     else {
         if (reg(ui->login_label->text(), ui->password_label->text(), ui->email_label->text())) {
-            this->hide();
-            emit auth_ok(ui->login_label->text());
+            emit sign_up(ui->login_label->text());
+        }
+        else {
+            // Выводим ошибку регистрации
         }
     }
 }
@@ -37,8 +39,7 @@ void AuthForm::on_sign_in_clicked() {
     }
     else {
         if (auth(ui->login_label->text(), ui->password_label->text())) {
-            this->hide();
-            emit auth_ok(ui->login_label->text());
+            emit sign_up(ui->login_label->text());
         }
         else {
             // Выводим ошибку авторизации

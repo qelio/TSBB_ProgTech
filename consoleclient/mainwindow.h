@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "authform.h"
+#include "functionclient.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,18 +18,22 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void get_stat(QString login);
 
 private slots:
     void on_dichotomy_method_button_clicked();
-    void on_aes_button_clicked();
     void on_shortest_distance_button_clicked();
-    void on_aes_return_clicked();
     void on_dichotomy_return_clicked();
     void on_shortest_distance_return_clicked();
-    void slot_on_auth(QString log);
+    void on_exit_button_clicked();
+    void on_stat_button_clicked();
 
 private:
+    QString login;
     Ui::MainWindow *ui;
     AuthForm * auth_ui;
+
+signals:
+    void close_window();
 };
 #endif // MAINWINDOW_H

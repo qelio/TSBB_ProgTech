@@ -20,10 +20,13 @@ private slots:
     void on_sign_up_clicked();
     void on_sign_in_clicked();
 
+signals:
+    void sign_in(QString login);
+    void sign_up(QString login);
+
 private:
     Ui::AuthForm *ui;
-signals:
-    void auth_ok(QString);
+
 };
 
 #endif // AUTHFORM_H
