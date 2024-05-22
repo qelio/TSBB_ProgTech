@@ -7,6 +7,7 @@
 #include <QRegularExpression>>
 #include "sha512.h"
 #include "database.h"
+#include "dichotomymethod.h"
 
 // Функция для проверки корретности email
 bool isValidEmail(QString email);
@@ -25,5 +26,7 @@ QByteArray getMyStat (long sockId);
 
 // Функция для парсинга получаемой строки
 QByteArray mainParser (QString request, long sockId);
+
+QByteArray task_1(double left, double right, int count_iters, double a, double b, double c, double ans, long sockId);
 
 #endif // FUNCTIONSERVER_H

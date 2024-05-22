@@ -117,3 +117,39 @@ QStringList database::queryToDatabase(QString str, int count_columns, bool selec
     res.append("success_sql");
     return res;
 }
+
+bool database::UpdateStat1True(long sockId) {
+    QString query = "UPDATE users SET stat1 = stat1 + 1 WHERE sockid = '%1'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(sockId), 0, false);
+    if (answer[0] != "error_sql") {
+        return true;
+    }
+    return false;
+}
+
+bool database::UpdateStat2True(long sockId) {
+    QString query = "UPDATE users SET stat2 = stat2 + 1 WHERE sockid = '%1'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(sockId), 0, false);
+    if (answer[0] != "error_sql") {
+        return true;
+    }
+    return false;
+}
+
+bool database::UpdateStat1False(long sockId) {
+    QString query = "UPDATE users SET stat1 = stat1 - 1 WHERE sockid = '%1'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(sockId), 0, false);
+    if (answer[0] != "error_sql") {
+        return true;
+    }
+    return false;
+}
+
+bool database::UpdateStat2False(long sockId) {
+    QString query = "UPDATE users SET stat2 = stat2 - 1 WHERE sockid = '%1'";
+    QStringList answer = p_instance->queryToDatabase(query.arg(sockId), 0, false);
+    if (answer[0] != "error_sql") {
+        return true;
+    }
+    return false;
+}

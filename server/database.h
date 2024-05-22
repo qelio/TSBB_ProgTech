@@ -40,6 +40,10 @@ public:
     int AuthUser(QString login, QString password, long sockId);
     bool RegUser(QString login, QString password, QString email, long sockId);
     bool LogOutUser(long sockId);
+    bool UpdateStat1True(long sockId);
+    bool UpdateStat2True(long sockId);
+    bool UpdateStat1False(long sockId);
+    bool UpdateStat2False(long sockId);
     bool ActiveSessionUser (QString login, long sockId);
     QStringList StatUser (QString login, long sockId);
     static database& getInstance();

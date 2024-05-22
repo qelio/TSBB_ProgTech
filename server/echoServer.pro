@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS # Игнорирование warnings (то е
 # Здесь необходимо написать все файлы .cpp (если добавляем файл вручную или переименовываем - необходимо внести изменения)
 SOURCES += \
     database.cpp \
+    dichotomymethod.cpp \
     functionserver.cpp \
     main.cpp \
     mytcpserver.cpp \
@@ -36,6 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 # Здесь необходимо написать все заголовочные файлы .h (если добавляем файл вручную или переименовываем - необходимо внести изменения)
 HEADERS += \
     database.h \
+    dichotomymethod.h \
     functionserver.h \
     mytcpserver.h \
     sha512.h

@@ -39,6 +39,21 @@ QByteArray getMyStat (QString login, long sockId) {
     return "stat-\r\n";
 }
 
+QByteArray task_1(double left, double right, int count_iters, double a, double b, double c, double ans, long sockId) {
+    if ((round(fabs(dichotomyFind(left, right, count_iters, a, b, c)) * 10000) / 10000) == (round(fabs(ans) * 10000) / 10000)) {
+        if (database::getInstance().UpdateStat1True(sockId)) {
+            return "check+\r\n";
+        }
+        return "db_error\r\n";
+    }
+    else {
+        if (database::getInstance().UpdateStat1False(sockId)) {
+            return "check-\r\n";
+        }
+        return "db_error\r\n";
+    }
+}
+
 bool logOutUser (long sockId) {
     qDebug() << sockId;
     if (database::getInstance().LogOutUser(sockId)) {
@@ -62,7 +77,13 @@ QByteArray mainParser (QString request, long sockId) {
     else if (command[0] == "stat") {
         return getMyStat(command[1].trimmed(), sockId);
     }
-    else {
-        return "incorrent\r\n";
+    else if (command[0] == "check") {
+        if (command[1] == "task_1") {
+            return task_1(command[2].toDouble(), command[3].toDouble(), command[4].toInt(), command[5].toDouble(), command[6].toDouble(), command[7].toDouble(), command[8].trimmed().toDouble(), sockId);
+        }
+        if (command[1] == "task_2") {
+
+        }
     }
+    return "incorrent\r\n";
 }
