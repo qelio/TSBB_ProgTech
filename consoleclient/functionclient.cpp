@@ -25,3 +25,18 @@ QStringList get_stat_login(QString login) {
     QStringList stats = res.split("&");
     return stats;
 }
+
+int getRandomNumber(int min, int max) {
+    return min + rand() % (max - min + 1);
+}
+
+bool checkDichotomyMethod(int left, int right, int count_iters, int a, int b, int c, double ans) {
+    QString res = SingletonClient::getInstance()->send_msg_to_server("check&task_1&" + QString::number(left) + "&" + QString::number(right) + "&" + QString::number(count_iters) + "&" + QString::number(a) + "&" + QString::number(b) + "&" + QString::number(c) + "&" + QString::number(ans));
+    qDebug() << res;
+    if (res == "check+\r\n") {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

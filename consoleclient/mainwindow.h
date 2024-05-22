@@ -20,6 +20,14 @@ public:
     ~MainWindow();
     void get_stat(QString login);
 
+private:
+    int left = getRandomNumber(1, 5);
+    int right = left + getRandomNumber(1, 5);
+    int count_iters = getRandomNumber(1, 5);
+    int a = getRandomNumber(1, 5);
+    int b = getRandomNumber(1, 5);
+    int c = getRandomNumber(1, 5);
+
 private slots:
     void on_dichotomy_method_button_clicked();
     void on_shortest_distance_button_clicked();
@@ -27,6 +35,8 @@ private slots:
     void on_shortest_distance_return_clicked();
     void on_exit_button_clicked();
     void on_stat_button_clicked();
+    void on_dichotomy_next_clicked();
+    void on_dichotomy_check_clicked();
 
 private:
     QString login;
