@@ -11,11 +11,14 @@
 #include <QByteArray> // Для побайтовой передачи данных (массив байтов)
 #include <QDebug> // Необходима для вывода в консоль каких-либо сообщений
 #include <QMap>
+#include "AES.h"
 
 class MyTcpServer : public QObject // Является наследником QObject, чтобы работал механизм сигналов и слотов
 {
     Q_OBJECT // Константа, в которой находится блок команд, который будет использоваться в классе
 public:
+    QByteArray encryptData(const QString& data);
+    QString decryptData(const QByteArray& encryptedData);
     explicit MyTcpServer(QObject *parent = nullptr); // Инициализирующий конструктор, со значение родительского объекта пустым
     ~MyTcpServer(); // Деструктор
 public slots:

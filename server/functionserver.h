@@ -8,6 +8,7 @@
 #include "sha512.h"
 #include "database.h"
 #include "dichotomymethod.h"
+#include "dijkstra.h"
 
 // Функция для проверки корретности email
 bool isValidEmail(QString email);
@@ -28,5 +29,7 @@ QByteArray getMyStat (long sockId);
 QByteArray mainParser (QString request, long sockId);
 
 QByteArray task_1(double left, double right, int count_iters, double a, double b, double c, double ans, long sockId);
+
+QByteArray task_2(int user_answer, std::vector<int>& values, long sockId);
 
 #endif // FUNCTIONSERVER_H

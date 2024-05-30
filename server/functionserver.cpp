@@ -54,6 +54,36 @@ QByteArray task_1(double left, double right, int count_iters, double a, double b
     }
 }
 
+QByteArray task_2(int user_answer, std::vector<int>& values, long sockId) {
+    int s = values[0];
+    int t = values[1];
+
+    std::vector<std::vector<int>> graph(NUM_VERTICES, std::vector<int>(NUM_VERTICES, INF));
+    int index = 2;
+    for (int i = 0; i < NUM_VERTICES; i++) {
+        for (int j = 0; j < NUM_VERTICES; j++) {
+            if (i == j) {
+                graph[i][j] = INF;
+            } else if (i < j) {
+                graph[i][j] = values[index++];
+                graph[j][i] = graph[i][j];
+            }
+        }
+    }
+    if (dijkstra(s, t, graph) == user_answer) {
+        if (database::getInstance().UpdateStat2True(sockId)) {
+            return "check+\r\n";
+        }
+        return "db_error\r\n";
+    }
+    else {
+        if (database::getInstance().UpdateStat2False(sockId)) {
+            return "check-\r\n";
+        }
+        return "db_error\r\n";
+    }
+}
+
 bool logOutUser (long sockId) {
     qDebug() << sockId;
     if (database::getInstance().LogOutUser(sockId)) {
@@ -82,7 +112,11 @@ QByteArray mainParser (QString request, long sockId) {
             return task_1(command[2].toDouble(), command[3].toDouble(), command[4].toInt(), command[5].toDouble(), command[6].toDouble(), command[7].toDouble(), command[8].trimmed().toDouble(), sockId);
         }
         if (command[1] == "task_2") {
-
+            std::vector<int> values;
+            for (int i = 3; i < command.size(); i++) {
+                values.push_back(command[i].trimmed().toInt());
+            }
+            return task_2(command[2].trimmed().toInt(), values, sockId);
         }
     }
     return "incorrent\r\n";

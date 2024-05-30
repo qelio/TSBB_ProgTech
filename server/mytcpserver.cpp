@@ -38,6 +38,22 @@ void MyTcpServer::slotNewConnection(){
     connect(mTcpSocket,&QTcpSocket::disconnected,this,&MyTcpServer::slotClientDisconnected);
 }
 
+QByteArray MyTcpServer::encryptData(const QString& data)
+{
+    unsigned char key[16] = "123456789012345";
+    AES aes(key);
+    QByteArray encryptedText = aes.encrypt(data);
+    return encryptedText;
+}
+
+QString MyTcpServer::decryptData(const QByteArray& encryptedData)
+{
+    unsigned char key[16] = "123456789012345";
+    AES aes(key);
+    QString decrypted = aes.decrypt(encryptedData);
+    return decrypted;
+}
+
 // Метод для чтения слота
 void MyTcpServer::slotServerRead(){
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
@@ -51,8 +67,10 @@ void MyTcpServer::slotServerRead(){
         string.append(array);
         // Вывод полученной строки в консоль
         qDebug() << string.toUtf8();
+        QString decryptedData = decryptData(string.toUtf8());
+        QByteArray encryptedData = encryptData(mainParser(decryptedData, socket->socketDescriptor()));
         // Вывод результата парсинга (результат зависит от типа вызываемой функции)
-        socket->write(mainParser(string, socket->socketDescriptor()));
+        socket->write(encryptedData);
     }
 }
 
