@@ -37,11 +37,18 @@ private slots:
     void on_stat_button_clicked();
     void on_dichotomy_next_clicked();
     void on_dichotomy_check_clicked();
+    void on_shortest_distance_check_clicked();
+    void on_shortest_distance_next_clicked();
 
 private:
     QString login;
     Ui::MainWindow *ui;
     AuthForm * auth_ui;
+    const int NUM_VERTICES = 5;
+    const int INF = INT_MAX;
+    std::vector<std::vector<int>> graph;
+    QString current_text = "";
+    int s, t;
 
 signals:
     void close_window();

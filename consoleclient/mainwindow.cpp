@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->dichotomy_answer->setVisible(false);
     on_dichotomy_next_clicked();
+    ui->dichotomy_answer->setVisible(false);
+    on_shortest_distance_next_clicked();
 }
 
 
@@ -63,6 +65,56 @@ void MainWindow::on_dichotomy_check_clicked() {
     }
 }
 
+void MainWindow::on_shortest_distance_check_clicked() {
+    ui->shortest_distance_answer->setVisible(true);
+    if (checkShortestDistance(ui->shortest_distance_label->text().toInt(), graph, s, t)) {
+        ui->shortest_distance_answer->setText("Вы решили задачу верно!");
+    }
+    else {
+        ui->shortest_distance_answer->setText("Вы решили задачу неверно!");
+    }
+}
+
+void MainWindow::on_shortest_distance_next_clicked() {
+    ui->shortest_distance_answer->setVisible(false);
+    ui->shortest_distance_label->setText("");
+    current_text = "";
+    srand(time(nullptr));
+    std::vector<std::vector<int>> graph_current(NUM_VERTICES, std::vector<int>(NUM_VERTICES, INF));
+    for (int i = 0; i < NUM_VERTICES; i++) {
+        for (int j = i + 1; j < NUM_VERTICES; j++) {
+            if (i != j) {
+                int distance = getRandomNumber(1, 10);
+                graph_current[i][j] = distance;
+                graph_current[j][i] = distance;
+            }
+        }
+    }
+    graph = graph_current;
+    s = getRandomNumber(0, NUM_VERTICES - 1);
+    t = getRandomNumber(0, NUM_VERTICES - 1);
+    while (s == t) {
+        t = getRandomNumber(0, NUM_VERTICES - 1);
+    }
+
+    // Вывод сгенерированной информации
+    current_text += "Граф с рандомными расстояниями между вершинами:\n\n";
+    for (int i = 0; i < NUM_VERTICES; i++) {
+        for (int j = 0; j < NUM_VERTICES; j++) {
+            if (graph[i][j] == INF) {
+                current_text += "INF\t";
+            } else {
+                current_text += QString::number(graph[i][j]) + "\t";
+            }
+        }
+        current_text += "\n";
+    }
+    current_text += "\nНачальная вершина s: " + QString::number(s) + "\n";
+    current_text += "Целевая вершина t: " + QString::number(t) + "\n";
+    qDebug() << current_text;
+    ui->shortest_distance_condition->setText(current_text);
+
+}
 
 void MainWindow::on_stat_button_clicked() {
     get_stat(this->login);

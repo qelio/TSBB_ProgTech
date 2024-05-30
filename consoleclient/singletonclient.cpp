@@ -23,15 +23,33 @@ SingletonClient* SingletonClient::getInstance()
     return p_instance;
 }
 
+QByteArray SingletonClient::encryptData(const QString& data)
+{
+    unsigned char key[16] = "123456789012345";
+    AES aes(key);
+    QByteArray encryptedText = aes.encrypt(data);
+    return encryptedText;
+}
+
+QString SingletonClient::decryptData(const QByteArray& encryptedData)
+{
+    unsigned char key[16] = "123456789012345";
+    AES aes(key);
+    QString decrypted = aes.decrypt(encryptedData);
+    return decrypted;
+}
+
 QString SingletonClient::send_msg_to_server(QString query)
 {
-    mTcpSocket->write(query.toUtf8());
+    QByteArray encryptedData = encryptData(query);
+    mTcpSocket->write(encryptedData);
     mTcpSocket->waitForReadyRead();
     QString msg = "";
     while (mTcpSocket->bytesAvailable() > 0) {
         QByteArray array = mTcpSocket->readAll();
         msg.append(array);
     }
-    return msg;
+    QString decryptedData = decryptData(msg.toUtf8());
+    return decryptedData;
 }
 

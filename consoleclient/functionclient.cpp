@@ -40,3 +40,24 @@ bool checkDichotomyMethod(int left, int right, int count_iters, int a, int b, in
         return false;
     }
 }
+
+bool checkShortestDistance(int user_answer, std::vector<std::vector<int>>& graph, int s, int t) {
+    QString msg = "check&task_2&" + QString::number(user_answer) + "&" + QString::number(s) + "&" + QString::number(t) + "&";
+    for (int i = 0; i < NUM_VERTICES; i++) {
+        for (int j = i + 1; j < NUM_VERTICES; j++) {
+            if (i != j) {
+                msg += QString::number(graph[i][j]) + "&";
+            }
+        }
+        // msg += "&";
+    }
+    qDebug() << msg;
+    QString res = SingletonClient::getInstance()->send_msg_to_server(msg);
+    qDebug() << res;
+    if (res == "check+\r\n") {
+        return true;
+    }
+    else {
+        return false;
+    }
+}

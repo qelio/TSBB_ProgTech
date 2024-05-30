@@ -9,6 +9,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include <iostream>
+#include "AES.h"
 
 class SingletonClient;
 
@@ -38,6 +39,8 @@ protected:
 public:
     static SingletonClient* getInstance();
     QString send_msg_to_server(QString query);
+    QByteArray encryptData(const QString& data);
+    QString decryptData(const QByteArray& encryptedData);
 
 
 };
